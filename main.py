@@ -1,30 +1,41 @@
 import tweepy
-
+import random
 
 auth = tweepy.OAuth1UserHandler('Z7xeyI23AEJdAQFb77cuxMREx',
                                 'JZDVJadhrVRcRg53tq6buYHtJtwDEEEdQTiSsyQa45B7XtlNoX',
                                 )
 auth.set_access_token('1408624157718372352-neK8GvzlpMqC0qULH6vPqjRLQwgbcg',
                       'n7RYgwNyKXRqA00MUVZhmRdqBbzF5sj5vgcGZR7hLiqSc')
-
 api = tweepy.API(auth)
 
 
-class Listener(tweepy.Stream):
-    def on_status(self, status):
-        print(status)
+# criando uma lista vazia de tweets
+
+def get_tweets(tweet):
+    tweets = []
+
+# Listinha de respostas, sorteando uma delas pra responder.
+
+def reply():
+    respostas = ["eu te amo muito sua gostosa", "voce e o amor da minha vida sabia",
+                     "concordo vamos casar", "LINDAAAAAA AAAAAAAAAAAA AAAAAAAAAAAA"]
+    which_one = random.randint(0, 3)
+    api.update_status(f'@smirellii {respostas[which_one]}')
 
 
-stream_tweet = Listener('Z7xeyI23AEJdAQFb77cuxMREx',
-                         'JZDVJadhrVRcRg53tq6buYHtJtwDEEEdQTiSsyQa45B7XtlNoX',
-                         '1408624157718372352-neK8GvzlpMqC0qULH6vPqjRLQwgbcg',
-                         'n7RYgwNyKXRqA00MUVZhmRdqBbzF5sj5vgcGZR7hLiqSc'
-                         )
-Listener = Listener('Z7xeyI23AEJdAQFb77cuxMREx',
-                     'JZDVJadhrVRcRg53tq6buYHtJtwDEEEdQTiSsyQa45B7XtlNoX',
-                     '1408624157718372352-neK8GvzlpMqC0qULH6vPqjRLQwgbcg',
-                     'n7RYgwNyKXRqA00MUVZhmRdqBbzF5sj5vgcGZR7hLiqSc')
+# pegar os tweet e responder
 
-stream = tweepy.Stream(auth = api.auth, listener = Listener)
-stream.filter(follow='1168241092636086274')
+user = 'smirellii'
+mi = api.user_timeline(user_id = 1168241092636086274)
+mi_tweets = get_tweets(mi)
+reply(mi_tweets)
+
+
+
+
+
+
+
+
+
 
