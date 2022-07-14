@@ -1,38 +1,30 @@
 import tweepy
-import random
+import pandas as pd
 
-auth = tweepy.OAuth1UserHandler('Z7xeyI23AEJdAQFb77cuxMREx',
-                                'JZDVJadhrVRcRg53tq6buYHtJtwDEEEdQTiSsyQa45B7XtlNoX',
-                                )
-auth.set_access_token('1408624157718372352-neK8GvzlpMqC0qULH6vPqjRLQwgbcg',
-                      'n7RYgwNyKXRqA00MUVZhmRdqBbzF5sj5vgcGZR7hLiqSc')
+# authentication
+auth = tweepy.OAuth1UserHandler('api_key', 'api_key_secret')
+auth.set_access_token('access_token', 'access_token_secret')
+
 api = tweepy.API(auth)
 
-
-# criando uma lista vazia de tweets
-
-def get_tweets(tweet):
-    tweets = []
-
-# Listinha de respostas, sorteando uma delas pra responder.
-
-def reply():
-    respostas = ["eu te amo muito sua gostosa", "voce e o amor da minha vida sabia",
-                     "concordo vamos casar", "LINDAAAAAA AAAAAAAAAAAA AAAAAAAAAAAA"]
-    which_one = random.randint(0, 3)
-    api.update_status(f'@smirellii {respostas[which_one]}')
-
-
-# pegar os tweet e responder
-
+# user tweets
 user = 'smirellii'
-mi = api.user_timeline(user_id = 1168241092636086274)
-mi_tweets = get_tweets(mi)
-reply(mi_tweets)
+limit=300
 
+tweets = tweepy.Cursor(api.user_timeline, screen_name=user, count=200, tweet_mode='extended').items(limit)
 
+# tweets = api.user_timeline(screen_name=user, count=limit, tweet_mode='extended')
 
+# create DataFrame
+columns = ['User', 'Tweet']
+data = []
 
+for tweet in tweets:
+    data.append([tweet.user.screen_name, tweet.full_text])
+
+df = pd.DataFrame(data, columns=columns)
+
+print(df)
 
 
 
