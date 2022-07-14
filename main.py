@@ -1,30 +1,33 @@
 import tweepy
-import pandas as pd
 
-# authentication
-auth = tweepy.OAuth1UserHandler('api_key', 'api_key_secret')
-auth.set_access_token('access_token', 'access_token_secret')
+
+# autenticação
+
+auth = tweepy.OAuth1UserHandler('syzR2OG9T426CndeJHXawljey', 'wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq')
+auth.set_access_token('1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U',
+                      'vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic')
 api = tweepy.API(auth)
 
-# user tweets
-user = 'smirellii'
-limit=300
+# criando uma stream
 
-tweets = tweepy.Cursor(api.user_timeline, screen_name=user, count=200, tweet_mode='extended').items(limit)
+stream = tweepy.Stream('syzR2OG9T426CndeJHXawljey',
+                       'wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq',
+                       '1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U',
+                       'vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic')
 
-# tweets = api.user_timeline(screen_name=user, count=limit, tweet_mode='extended')
 
-# create DataFrame
-columns = ['User', 'Tweet']
-data = []
+class MiListener(tweepy.Stream):
 
-for tweet in tweets:
-    data.append([tweet.user.screen_name, tweet.full_text])
+    def on_status(self, status):
+        print(status)
+        api.update_status("oii", in_reply_to_status_id=1408624157718372352)
 
-df = pd.DataFrame(data, columns=columns)
 
-print(df)
-
+MiListener = MiListener(
+    "syzR2OG9T426CndeJHXawljey", "wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq",
+    "1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U", "vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic"
+)
+MiListener.filter(follow=[1408624157718372352], threaded=True)
 
 
 
