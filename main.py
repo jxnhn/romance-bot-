@@ -3,17 +3,17 @@ import tweepy
 
 # autenticação
 
-auth = tweepy.OAuth1UserHandler('syzR2OG9T426CndeJHXawljey', 'wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq')
-auth.set_access_token('1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U',
-                      'vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic')
+auth = tweepy.OAuth1UserHandler('consumer', 'consumer secret')
+auth.set_access_token('acess',
+                      'acess secret')
 api = tweepy.API(auth)
 
 # criando uma stream
 
-stream = tweepy.Stream('syzR2OG9T426CndeJHXawljey',
-                       'wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq',
-                       '1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U',
-                       'vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic')
+stream = tweepy.Stream('consumer',
+                       'consumer secret',
+                       'acess',
+                       'acess secret')
 
 
 class MiListener(tweepy.Stream):
@@ -24,8 +24,8 @@ class MiListener(tweepy.Stream):
 
 
 MiListener = MiListener(
-    "syzR2OG9T426CndeJHXawljey", "wFvstaHRYxH5sQc7nvd962oPHfIFUwNAnt7qx2oTvgJJPoDkyq",
-    "1408624157718372352-ejkMgOA6s5A8fYbzVAgO0E0muCjC2U", "vQ38rOItfogW21KpzWkZ7fuaCrnP0TNuZOh8uxD4UzTic"
+    "consumer", "consumer secret",
+    "acess", "acess secret"
 )
 MiListener.filter(follow=[1408624157718372352], threaded=True)
 
