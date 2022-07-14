@@ -1,11 +1,11 @@
 import tweepy
 import random
 
-auth = tweepy.OAuth1UserHandler('Z7xeyI23AEJdAQFb77cuxMREx',
-                                'JZDVJadhrVRcRg53tq6buYHtJtwDEEEdQTiSsyQa45B7XtlNoX',
+auth = tweepy.OAuth1UserHandler('my_keys',
+                                'keys',
                                 )
-auth.set_access_token('1408624157718372352-neK8GvzlpMqC0qULH6vPqjRLQwgbcg',
-                      'n7RYgwNyKXRqA00MUVZhmRdqBbzF5sj5vgcGZR7hLiqSc')
+auth.set_access_token('keys',
+                      'keys')
 api = tweepy.API(auth)
 
 
