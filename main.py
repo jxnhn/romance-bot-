@@ -4,15 +4,6 @@ import pandas as pd
 # authentication
 auth = tweepy.OAuth1UserHandler('api_key', 'api_key_secret')
 auth.set_access_token('access_token', 'access_token_secret')
-
-auth = tweepy.OAuth1UserHandler('my_keys',
-                                'keys',
-                                )
-auth.set_access_token('keys',
-                      'keys')
-api = tweepy.API(auth)
-
-
 api = tweepy.API(auth)
 
 # user tweets
